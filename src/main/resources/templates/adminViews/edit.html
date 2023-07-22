@@ -1,0 +1,70 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UpdatePerson</title>
+</head>
+<body>
+
+<style>
+    table {
+        border-spacing: 0 5px;
+        font: bold 100% Georgia, serif;
+        margin: 40px 0;
+        text-shadow: 5px 5px 5px #3F3F7F;
+        background: #B1B9D9;
+        text-align: center;
+        vertical-align: middle;
+        width: 50%;
+        border: 10px solid blue;
+    }
+
+    caption {
+        color: black;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    th {
+        color: #49008f;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    input, button {
+        color: brown;
+        background: aliceblue;
+        font: bold 100% Georgia, serif;
+        text-shadow: 5px 5px 5px #3F3F7F;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+<form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
+    <label for="username">Enter username: </label>
+    <input type="text" th:field="*{username}" id = "username"/>
+    <div style ="color:#ff0090" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+    <br/>
+    <label for="password">Enter password: </label>
+    <input type="text" th:field="*{password}" id = "password"/>
+    <div style ="color:#00ff59" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+    <br/>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id = "age"/>
+    <div style ="color:#0048ff" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id = "email"/>
+    <div style ="color:#00ff59" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br/>
+
+    <input type="submit" value="Update!"/>
+
+    <br/>
+    <hr/>
+    <a href="/logout">Logout</a>
+</form>
+
+</body>
+</html>

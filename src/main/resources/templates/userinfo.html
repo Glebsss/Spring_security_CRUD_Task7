@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Информация о пользователе</title>
+</head>
+<body>
+<h1>Информация о пользователе</h1>
+
+<p>Имя пользователя: <span th:text="${user.username}"></span></p>
+<p>Возраст пользователя: <span th:text="${user.age}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+<p>ID: <span th:text="${user.id}"></span></p>
+
+<br/>
+<a href="/logout">Выйти</a>
+</body>
+</html>
