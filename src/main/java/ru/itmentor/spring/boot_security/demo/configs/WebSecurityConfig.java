@@ -22,20 +22,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            // .csrf().disable()//Включаем Для постмана
-
                 .authorizeRequests()
-                .antMatchers("/","/index","/hello").permitAll()
-
-               .antMatchers("/admin/**").hasRole("ADMIN")  //Отключаем для POSTMANа
-                .antMatchers("/user/**").hasAnyRole("USER","ROLE_USER","ROLE_ADMIN", "ADMIN") //отключаем для постмана
+                .antMatchers("/", "/index", "/hello").permitAll()
+//
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .and()
                 .formLogin()
-               .successHandler(successUserHandler)    //отключаем для POSTMANа
-                .permitAll()
+                .successHandler(successUserHandler)    //отключаем для POSTMANа
+                .permitAll().
+
+                and().httpBasic()//для базовой авторизации в постмане
+
                 .and()
                 .logout()
                 .permitAll();
+        http
+                .csrf().disable();//вкл для постмана
     }
 
 

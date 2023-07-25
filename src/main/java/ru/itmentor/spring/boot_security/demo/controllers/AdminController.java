@@ -19,14 +19,14 @@ public class AdminController {
     public AdminController(UserService userService) {
         this.userService = userService;
     }
-
+//------------------------------------------------------------------------------------------------------------
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userService.allUsers());
         return "adminViews/all";
     }
 
-
+//------------------------------------------------------------------------------------------------------------
     @GetMapping("/registration")
     public String registration(Model model){
         model.addAttribute("user", new User());
@@ -47,13 +47,13 @@ public class AdminController {
 
         return "redirect:/admin";
     }
-
+//----------------------------------------------------------------------------------------------------------------------
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.findUserById(id));
         return "adminViews/show";
     }
-//---------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.findUserById(id));
@@ -69,7 +69,7 @@ public class AdminController {
         userService.update(id,user);
         return "redirect:/admin";
     }
-//-----------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id){
         userService.deleteUser(id);

@@ -11,6 +11,7 @@ import ru.itmentor.spring.boot_security.demo.models.Role;
 import ru.itmentor.spring.boot_security.demo.models.User;
 import ru.itmentor.spring.boot_security.demo.repositories.RoleRepository;
 import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
+import ru.itmentor.spring.boot_security.demo.util.UserNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -50,7 +51,8 @@ public class UserService implements UserDetailsService {
 
     public User findUserById(int userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(null);
+        return userFromDb.orElseThrow(UserNotFoundException::new);
+//                (null);
     }
 
 
