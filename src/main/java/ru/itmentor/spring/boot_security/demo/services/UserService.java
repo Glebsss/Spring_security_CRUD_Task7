@@ -55,7 +55,6 @@ public class UserService implements UserDetailsService {
 //                (null);
     }
 
-
     public List<User> allUsers() {
         return userRepository.findAll();
     }
