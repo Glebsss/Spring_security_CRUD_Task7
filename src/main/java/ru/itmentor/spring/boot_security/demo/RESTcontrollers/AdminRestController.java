@@ -70,7 +70,7 @@ public class AdminRestController {
 //    public ResponseEntity<HttpStatus> edit(Model model, @PathVariable("id") int id) {
 //        model.addAttribute("user", userService.findUserById(id));
 //        return ResponseEntity.ok(HttpStatus.OK);
-//    }
+//
 
     @PatchMapping("/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody @Valid User user,BindingResult bindingResult,
