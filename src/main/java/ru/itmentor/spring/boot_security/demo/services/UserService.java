@@ -61,15 +61,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public boolean saveUser(User user) {
-        User userFromDb = userRepository.findByUsername(user.getUsername()); //ищем в БД пользователя с таким именем
+        User userFromDb = userRepository.findByUsername(user.getUsername());
 
-        if (userFromDb != null) { //заканчиваем работу если такой уже есть
+        if (userFromDb != null) {
             return false;
         }
-        //Если имя пользователя не занято, добавляем пользователя с ролью юзер
+
         user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));//пароль шифруем енкодером
-        //сохраняем нового юзера в БД
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
