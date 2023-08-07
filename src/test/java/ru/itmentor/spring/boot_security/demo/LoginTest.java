@@ -32,35 +32,35 @@ public class LoginTest {
     @Test //помечаем тестовые методы
     public void test() throws Exception {
 //        assertThat(adminController).isNotNull(); //проверяем что контроллер с контекстом подтянут
-        this.mockMvc.perform(get("/")) //хотим выполнить get запрос на главную страницу проекта
-                .andDo(print()) //данный метод выводит полученный результат в консоль (можем посмотреть что сломалось когда сломается)
-                .andExpect(status().isOk()) //обёртка assert, позволяет сравнить полученный результат с ожидаемым и выбросить исключение если что-то идёт не так, ожидаем что вернется 200ый код
-                .andExpect(content().string(containsString("Welcome to Index PAGE!"))); //ожидаем какой-то контент(в данном случаее строку) и его мы проверяем(сравниваем) на содержание подстроки "Hello World!"
+        this.mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Welcome to Index PAGE!")));
     }
 
     @Test //помечаем тестовые методы
     public void sayHelloTest() throws Exception {
 //        assertThat(adminController).isNotNull(); //проверяем что контроллер с контекстом подтянут
-        this.mockMvc.perform(get("/hello")) //хотим выполнить get запрос на главную страницу проекта
-                .andDo(print()) //данный метод выводит полученный результат в консоль (можем посмотреть что сломалось когда сломается)
-                .andExpect(status().isOk()) //обёртка assert, позволяет сравнить полученный результат с ожидаемым и выбросить исключение если что-то идёт не так, ожидаем что вернется 200ый код
-                .andExpect(content().string(containsString("Hello world!"))); //ожидаем какой-то контент(в данном случаее строку) и его мы проверяем(сравниваем) на содержание подстроки "Hello World!"
+        this.mockMvc.perform(get("/hello"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Hello world!")));
     }
 
     @Test
     public void accessDeniedTest() throws Exception {
-        this.mockMvc.perform(get("/admin")) //гет запрос
+        this.mockMvc.perform(get("/admin"))
                 .andDo(print()) //выводим результат
-                .andExpect(status().is4xxClientError()) //система ожидает статус отличный от 200ого , выберем 400, будет перенаправление на страничку логина
-                .andExpect(redirectedUrl(null)); //ожидаем что система подкинет адрес логина ?????????????????
+                .andExpect(status().is4xxClientError())
+                .andExpect(redirectedUrl(null)); //ожидаем что система подкинет адрес логина ?
     }
 
     @Test
     public void correctLoginTest() throws Exception {
         this.mockMvc.perform(formLogin().user("admin").password("admin"))   //проверяем авторизацию пользователя через MockMvc
                 .andDo(print()) //выводим результат
-                .andExpect(status().is3xxRedirection()) //ожидаем 3** статус
-                .andExpect(redirectedUrl("/admin")); //ожидаемый адрес редиректа
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin"));
     }
 
     @Test

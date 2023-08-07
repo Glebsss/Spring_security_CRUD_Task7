@@ -21,7 +21,7 @@ public class Role implements GrantedAuthority {
     private int id;
 
     @NotEmpty(message = "Role should not be Empty!")
-    @Size(min = 2, max =30, message ="Name should be between 2 and 30 characters. ")
+    @Size(min = 2, max = 30, message ="Name should be between 2 and 30 characters. ")
     @Column(name="roleName")
     private String roleName;
 

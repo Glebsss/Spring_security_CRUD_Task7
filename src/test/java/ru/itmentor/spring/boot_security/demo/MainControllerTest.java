@@ -44,13 +44,4 @@ public class MainControllerTest {
                 .andExpect(jsonPath("$.id").value(1));
     }
 
-        //ожидаем получить xpath, который достали из приложения со вкладки админа при исследовании эллемента
-
-//    @Test
-//    public void messageListTest() throws Exception{
-//        this.mockMvc.perform(get("/admin"))
-//                .andDo(print())
-//                .andExpect(authenticated())
-//                .andExpect(xpath("").nodeCount());
-//    }
 }

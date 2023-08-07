@@ -37,7 +37,6 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -48,11 +47,10 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-
     public User findUserById(int userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElseThrow(UserNotFoundException::new);
-//                (null);
+
     }
 
     public List<User> allUsers() {
@@ -62,11 +60,9 @@ public class UserService implements UserDetailsService {
     @Transactional
     public boolean saveUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
-
         if (userFromDb != null) {
             return false;
         }
-
         user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

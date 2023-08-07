@@ -24,16 +24,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/hello").permitAll()
-
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .and()
                 .formLogin()
                 .successHandler(successUserHandler)
-                .permitAll().
-
-                and().httpBasic()//для базовой авторизации в постмане
-
+                .permitAll()
+                        .and().httpBasic()//для базовой авторизации в постмане
                 .and()
                 .logout()
                 .permitAll();

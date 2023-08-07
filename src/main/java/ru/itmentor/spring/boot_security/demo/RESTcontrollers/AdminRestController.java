@@ -43,19 +43,17 @@ public class AdminRestController {
                                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder(); //обработка ошибки
-
             List<FieldError> errors = bindingResult.getFieldErrors(); //получаем ошибки из bindingResult, собираем в лист
-
             for (FieldError error : errors) { //проходимся по всем ошибкам и их конкатенируем в строку
                 errorMsg.append(error.getField())//вызываем поле в котором была совершена ошибка
                         .append(" - ").append(error.getDefaultMessage()) //конкатенируем знак - , выводим какая ошика была в поле
-                        .append(";"); //отделяем ошибки друг от друга
+                        .append(";");
             }
-            throw new UserNotCreatedException(errorMsg.toString()); //выбрасываем наше кастомное исключение, нужно его обработать раз выбрасываем из метода контролера
+            throw new UserNotCreatedException(errorMsg.toString());
         }
         userService.saveUser(user);
-        // отправляем HTTP ответ с пустым телом и статусом 200
-        return ResponseEntity.ok(HttpStatus.OK); //статус ОК - все прошло успешно
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //----------------------------------------------------------------------------------------
@@ -70,9 +68,6 @@ public class AdminRestController {
     @PatchMapping("/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody @Valid User user,BindingResult bindingResult,
                          @PathVariable("id") int id){
-//        if(bindingResult.hasErrors())
-//            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-
         userService.update(id,user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
