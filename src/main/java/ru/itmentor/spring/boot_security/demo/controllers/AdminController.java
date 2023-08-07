@@ -44,7 +44,6 @@ public class AdminController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "adminViews/registration";
         }
-
         return "redirect:/admin";
     }
 //----------------------------------------------------------------------------------------------------------------------

@@ -37,7 +37,6 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -48,11 +47,10 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-
     public User findUserById(int userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElseThrow(UserNotFoundException::new);
-//                (null);
+
     }
 
     public List<User> allUsers() {
@@ -61,15 +59,12 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public boolean saveUser(User user) {
-        User userFromDb = userRepository.findByUsername(user.getUsername()); //ищем в БД пользователя с таким именем
-
-        if (userFromDb != null) { //заканчиваем работу если такой уже есть
+        User userFromDb = userRepository.findByUsername(user.getUsername());
+        if (userFromDb != null) {
             return false;
         }
-        //Если имя пользователя не занято, добавляем пользователя с ролью юзер
         user.setRoles(Collections.singleton(new Role(1, "ROLE_USER")));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));//пароль шифруем енкодером
-        //сохраняем нового юзера в БД
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
@@ -102,15 +97,6 @@ public class UserService implements UserDetailsService {
             user.setPassword(updateUser.getPassword());
             userRepository.save(user);
 
-//        updateUser.setId(id);
-//        userRepository.save(updateUser);
-
-//
-//        User user = userRepository.findById((long) id);
-//        user.setUsername(updateUser.getUsername());
-//        user.setAge(updateUser.getAge());
-//        user.setEmail(updateUser.getEmail());
-//        user.setPassword(updateUser.getPassword());
         }
     }
 }
